@@ -1,0 +1,23 @@
+<!-- HTML -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mostrar Imagen</title>
+  <style>
+    #output {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <label for="imagenNombre">Nombre de la Imagen:</label>
+  <input type="text" id="imagenNombre" placeholder="Ingrese el nombre del archivo" onkeydown="if (event.key === 'Enter') mostrarImagen()">
+  <div id="resultado">
+    <!-- Aquí se mostrará la imagen -->
+  </div>
+</body>
+</html>
