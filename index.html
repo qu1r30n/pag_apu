@@ -1,18 +1,25 @@
-<!-- Inicio del documento HTML -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <!-- Metadatos del documento -->
-  <meta charset="UTF-8"> <!-- Codificación de caracteres UTF-8 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajustar el tamaño de la página al ancho del dispositivo -->
-  <title>Detector de teclas</title> <!-- Título de la página web -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar imágenes cargadas</title>
 </head>
 <body>
-  <!-- Contenido del documento -->
-  <h1>Detector de teclas</h1> <!-- Título de la página web en el cuerpo del documento -->
-  <p id="resultado">Presiona una tecla para ver su valor</p> <!-- Elemento para mostrar el resultado de la detección de teclas -->
-  <!-- Enlazar el archivo JS que contiene el código JavaScript -->
-  <script src="script.js"></script>
+
+    <h2>Mostrar imágenes cargadas</h2>
+
+    <form>
+        <label for="imagenes">Selecciona imágenes:</label>
+        <input type="file" id="imagenes" accept="image/*" multiple>
+    </form>
+
+    <label for="buscarImagen">Buscar por ID:</label>
+    <input type="text" id="buscarImagen" onkeyup="buscarImagen(event)">
+
+    <div id="preview"></div>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
-<!-- Fin del documento HTML -->

@@ -1,18 +1,49 @@
-// script.js
+document.getElementById('imagenes').addEventListener('change', function (event) {
+    var previewDiv = document.getElementById('preview');
+    previewDiv.innerHTML = ''; // Limpiar la vista previa antes de agregar nuevas imágenes
 
-function mostrarImagen() {
-  var nombre = document.getElementById('imagenNombre').value;
-  var carpeta = 'imagenes/todas/';
-  var url = carpeta + nombre;
-  var resultado = document.getElementById('resultado');
+    var files = event.target.files;
 
-  // Muestra un alert para saber qué tecla se está presionando
-  alert('Tecla presionada: ' + event.key);
+    for (var i = 0; i < files.length; i++) {
+        (function (file) {
+            var reader = new FileReader();
 
-  // Verificar si el campo de nombre está lleno y la URL es válida
-  if (nombre && url.match(/\.(jpeg|jpg|gif|png)$/) != null) {
-    resultado.innerHTML = '<img id="output" src="' + url + '" alt="' + nombre + '">';
-  } else {
-    resultado.innerHTML = '<p>Por favor, ingresa un nombre válido.</p>';
-  }
+            reader.onload = function (e) {
+                // Crear un elemento de imagen y establecer su fuente
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.width = 300;
+
+                // Asignar el ID de la imagen como el nombre del archivo
+                var fileName = file.name.replace(/\.[^/.]+$/, ""); // Eliminar la extensión del archivo
+                img.id = fileName;
+
+                // Agregar la imagen al div de vista previa
+                previewDiv.appendChild(img);
+            };
+
+            // Leer el contenido de la imagen como una URL de datos
+            reader.readAsDataURL(file);
+        })(files[i]);
+    }
+});
+
+function buscarImagen(event) {
+    if (event.key === 'Enter') {
+        var buscarImagenInput = document.getElementById('buscarImagen');
+        var filtro = buscarImagenInput.value.trim().toLowerCase();
+
+        var imagenes = document.getElementById('preview').getElementsByTagName('img');
+
+        for (var i = 0; i < imagenes.length; i++) {
+            var img = imagenes[i];
+
+            if (img.id.toLowerCase().includes(filtro)) {
+                img.style.display = 'inline-block';
+            } else {
+                img.style.display = 'none';
+            }
+        }
+    }
 }
+
