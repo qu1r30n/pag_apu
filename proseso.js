@@ -6,24 +6,27 @@ document.getElementById('imagenes').addEventListener('change', function (event) 
 
     for (var i = 0; i < files.length; i++) {
         (function (file) {
-            var reader = new FileReader();
+            // Validar que el archivo sea una imagen
+            if (file.type.startsWith('image/')) {
+                var reader = new FileReader();
 
-            reader.onload = function (e) {
-                // Crear un elemento de imagen y establecer su fuente
-                var img = document.createElement('img');
-                img.src = e.target.result;
-                img.width = 300;
+                reader.onload = function (e) {
+                    // Crear un elemento de imagen y establecer su fuente
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.width = 300;
 
-                // Asignar el ID de la imagen como el nombre del archivo
-                var fileName = file.name.replace(/\.[^/.]+$/, ""); // Eliminar la extensión del archivo
-                img.id = fileName;
+                    // Asignar el ID de la imagen como el nombre del archivo
+                    var fileName = file.name.replace(/\.[^/.]+$/, ""); // Eliminar la extensión del archivo
+                    img.id = fileName;
 
-                // Agregar la imagen al div de vista previa
-                previewDiv.appendChild(img);
-            };
+                    // Agregar la imagen al div de vista previa
+                    previewDiv.appendChild(img);
+                };
 
-            // Leer el contenido de la imagen como una URL de datos
-            reader.readAsDataURL(file);
+                // Leer el contenido de la imagen como una URL de datos
+                reader.readAsDataURL(file);
+            }
         })(files[i]);
     }
 });
@@ -38,7 +41,10 @@ function buscarImagen(event) {
         for (var i = 0; i < imagenes.length; i++) {
             var img = imagenes[i];
 
-            if (img.id.toLowerCase().includes(filtro)) {
+            // Convertir tanto el ID de la imagen como el filtro a minúsculas para una comparación insensible a mayúsculas y minúsculas
+            var imgId = img.id.toLowerCase();
+
+            if (imgId.includes(filtro)) {
                 img.style.display = 'inline-block';
             } else {
                 img.style.display = 'none';
@@ -46,4 +52,3 @@ function buscarImagen(event) {
         }
     }
 }
-
