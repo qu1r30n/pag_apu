@@ -42,19 +42,52 @@ function buscarImagen(event) {
 
         var imagenes = document.getElementById('preview').getElementsByTagName('img');
 
-        // Iterar sobre las imágenes y aplicar el filtro
+        // Ocultar todas las imágenes
         for (var i = 0; i < imagenes.length; i++) {
+            var img = imagenes[i];
+            img.style.display = 'none';
+        }
+
+        // Llamar a la función con la variable filtro
+        var arrayDeSegmentos = dividirFiltroEnSegmentos(filtro);
+
+        // Iterar sobre las imágenes y aplicar el filtro
+        for (var i = 0; i < imagenes.length; i++) 
+        {
             var img = imagenes[i];
 
             // Convertir tanto el ID de la imagen como el filtro a minúsculas para una comparación insensible a mayúsculas y minúsculas
             var imgId = img.id.toLowerCase();
 
-            // Mostrar u ocultar la imagen según si coincide con el filtro
-            if (imgId.includes(filtro)) {
-                img.style.display = 'inline-block';
-            } else {
-                img.style.display = 'none';
+            // Iterar sobre los segmentos del filtro
+            for (var j = 0; j < arrayDeSegmentos.length; j++) 
+            {
+                // Mostrar u ocultar la imagen según si coincide con el filtro
+                if (imgId.includes(arrayDeSegmentos[j])) {
+                    img.style.display = 'inline-block';
+                    // Si la imagen coincide con al menos un segmento, puedes salir del bucle interno
+                    break;
+                }
             }
         }
     }
 }
+
+
+// Función para dividir el filtro en segmentos de dos letras y guardarlos en un array
+function dividirFiltroEnSegmentos(filtro) {
+    var arrayDeSegmentos = [];
+
+    // Iterar sobre el filtro con un paso de 2 letras
+    for (var i = 0; i < filtro.length; i += 2) {
+        // Obtener el segmento de dos letras
+        var segmento = filtro.slice(i, i + 2);
+        
+        // Agregar el segmento al array
+        arrayDeSegmentos.push(segmento);
+    }
+
+    return arrayDeSegmentos;
+}
+
+
