@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar imágenes cargadas</title>
+    <!-- Vincula el archivo CSS externo -->
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+</head>
+<body>
+
+    <h2>Mostrar imágenes cargadas</h2>
+
+    <form>
+        <label for="imagenes">Selecciona imágenes:</label>
+        <!-- Input para seleccionar imágenes -->
+        <input type="file" id="imagenes" accept="image/*" multiple>
+    </form>
+
+    <!-- Input para buscar imágenes por ID -->
+    <label for="buscarImagen">Buscar por ID:</label>
+    <input type="text" id="buscarImagen" onkeypress="buscarImagen(event)">
+
+    <!-- Div para mostrar la vista previa de las imágenes cargadas -->
+    <div id="preview"></div>
+
+    <!-- Script que maneja la lógica de carga y búsqueda de imágenes -->
+    <script src="script.js"></script>
+
+    <script src="cliente_web_soket.js"></script>
+
+</body>
+</html>

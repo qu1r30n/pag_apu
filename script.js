@@ -89,5 +89,14 @@ function dividirFiltroEnSegmentos(filtro) {
 
     return arrayDeSegmentos;
 }
+//----------------------------------------------------------------------------
+
+function agregarMensaje() {
+    var mensaje = document.getElementById("cartas_input").value;
+    var nuevoMensaje = document.createElement("p");
+    nuevoMensaje.textContent = mensaje;
+    document.getElementById("mensajesContainer").appendChild(nuevoMensaje);
+    document.getElementById("cartas_input").value = "";
+}
 
 
