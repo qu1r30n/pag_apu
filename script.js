@@ -91,12 +91,52 @@ function dividirFiltroEnSegmentos(filtro) {
 }
 //----------------------------------------------------------------------------
 
-function agregarMensaje() {
+function agregarMensaje() 
+{
     var mensaje = document.getElementById("cartas_input").value;
     var nuevoMensaje = document.createElement("p");
     nuevoMensaje.textContent = mensaje;
-    document.getElementById("mensajesContainer").appendChild(nuevoMensaje);
+    document.getElementById("manoContainer").appendChild(nuevoMensaje);
     document.getElementById("cartas_input").value = "";
+
+    // Obtén el contenido de los contenedores de mesa y mano
+    var contenidoMesa = document.getElementById("mesaContainer").textContent;
+    var contenidoMano = document.getElementById("manoContainer").textContent;
+
+    // Llamar a la función con la variable filtro
+    var arreglo_mesa = dividirFiltroEnSegmentos(contenidoMesa);
+    // Llamar a la función con la variable filtro
+    var arreglo_mano = dividirFiltroEnSegmentos(contenidoMano);
+    
+
+    var resultado = evaluarJuego(arreglo_mesa,arreglo_mano);
+
+    document.getElementById("mesaContainer").textContent=resultado;
+
+}
+//evaluacion---------------------------------------------------------------------
+
+function evaluarJuego(mesa, mano) 
+{
+    // Concatenar las cartas en la mesa y en la mano del jugador
+    var cartasTotales = mesa.concat(mano);
+    
+    var numeros = cartasTotales.map(cart => cart[0]);
+    var letras = cartasTotales.map(cart => cart[1]);
+
+    var resultado = contarElementosIguales(numeros);
+
+    
+
+    return "";
+    
 }
 
-
+function contarElementosIguales(arreglo) 
+{
+  return arreglo.reduce((acc, valor) => 
+  {
+    acc[valor] = (acc[valor] || 0) + 1;
+    return acc;
+  }, {});
+}

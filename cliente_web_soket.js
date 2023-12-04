@@ -31,12 +31,12 @@ formulario.addEventListener('submit', (event) => {
 
 // Mostrar mensajes debajo del formulario.
 function mostrarMensaje(mensaje) {
-  const mensajesContainer = document.getElementById('mensajesContainer');
+  const mesaContainer = document.getElementById('mesaContainer');
 
   // Crear un elemento de párrafo para mostrar el mensaje.
   const mensajeParrafo = document.createElement('p');
   mensajeParrafo.textContent = mensaje;
 
   // Agregar el elemento de párrafo al contenedor.
-  mensajesContainer.appendChild(mensajeParrafo);
+  mesaContainer.appendChild(mensajeParrafo);
 }
