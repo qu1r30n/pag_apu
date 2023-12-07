@@ -124,7 +124,11 @@ function evaluarJuego(mesa, mano)
     var numeros = cartasTotales.map(cart => cart[0]);
     var letras = cartasTotales.map(cart => cart[1]);
 
-    var resultado = contarElementosIguales(numeros);
+    var resultado_numeros = contarElementosIguales(numeros);
+    var resultado_letras = contarElementosIguales(letras);
+
+    encontrarCincoConsecutivosConLetras(numeros);
+    encontrarCincoConsecutivosConLetras(letras);
 
     
 
@@ -140,3 +144,33 @@ function contarElementosIguales(arreglo)
     return acc;
   }, {});
 }
+
+function encontrarCincoConsecutivosConLetras(numeros, letras) 
+{
+  const setNumeros = new Set(numeros);
+  const consecutivosEncontrados = [];
+
+  for (let num of setNumeros) 
+  {
+    if (
+      setNumeros.has(num) &&
+      setNumeros.has(num + 1) &&
+      setNumeros.has(num + 2) &&
+      setNumeros.has(num + 3) &&
+      setNumeros.has(num + 4)
+    ) {
+      const secuenciaNumeros = [num, num + 1, num + 2, num + 3, num + 4];
+      const secuenciaLetras = secuenciaNumeros.map(n => letras[numeros.indexOf(n)]);
+
+      // Verificar si todas las letras son iguales en la misma posición
+      if (secuenciaLetras.every((letra, index) => letra === letras[numeros.indexOf(secuenciaNumeros[index])])) {
+        consecutivosEncontrados.push({ numeros: secuenciaNumeros, letras: secuenciaLetras });
+      }
+    }
+  }
+
+  return consecutivosEncontrados;
+}
+
+
+
