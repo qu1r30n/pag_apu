@@ -20,7 +20,9 @@ const formulario = document.getElementById('mensajeForm');
 const inputMensaje = document.getElementById('mensajeInput');
 formulario.addEventListener('submit', (event) => {
   event.preventDefault();
-  const mensaje = inputMensaje.value;
+  var mensaje = inputMensaje.value;
+
+  mensaje = mensaje.toUpperCase();
 
   // Enviar el mensaje al servidor.
   socket.send(mensaje);

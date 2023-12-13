@@ -94,11 +94,12 @@ function dividirFiltroEnSegmentos(filtro) {
 function agregarMensaje() 
 {
     var mensaje = document.getElementById("cartas_input").value;
+    mensaje = mensaje.toUpperCase();
     var nuevoMensaje = document.createElement("p");
     nuevoMensaje.textContent = mensaje;
     document.getElementById("manoContainer").appendChild(nuevoMensaje);
     document.getElementById("cartas_input").value = "";
-
+         
     // Obtén el contenido de los contenedores de mesa y mano
     var contenidoMesa = document.getElementById("mesaContainer").textContent;
     var contenidoMano = document.getElementById("manoContainer").textContent;
@@ -120,17 +121,47 @@ function evaluarJuego(mesa, mano)
 {
     // Concatenar las cartas en la mesa y en la mano del jugador
     var cartasTotales = mesa.concat(mano);
+    cartasTotales = cartasTotales.map(carta => carta.toUpperCase());
     
     var numeros = cartasTotales.map(cart => cart[0]);
+    for (var i = 0; i < numeros.length; i++) 
+    {
+        if (numeros[i]=="1") 
+        {
+            numeros[i]="10";
+        }
+        else if (numeros[i]=="j") 
+        {
+            numeros[i]="11";
+        }
+        else if (numeros[i]=="Q") 
+        {
+            numeros[i]="12";
+        }
+        else if (numeros[i]=="K") 
+        {
+            numeros[i]="13";
+        }
+        else if (numeros[i]=="A") 
+        {
+            numeros[i]="14";
+        }
+        
+    }
+
     var letras = cartasTotales.map(cart => cart[1]);
 
-    var resultado_numeros = contarElementosIguales(numeros);
-    var resultado_letras = contarElementosIguales(letras);
+    
 
-    encontrarCincoConsecutivosConLetras(numeros);
-    encontrarCincoConsecutivosConLetras(letras);
+
+    var resultado_numeros = contarElementosIguales(numeros);
 
     
+    var resultado_letras = contarElementosIguales(letras);
+
+    var consecutivos_y_letra = contarElementosIguales(consecutivos);
+
+    var 
 
     return "";
     
@@ -145,31 +176,36 @@ function contarElementosIguales(arreglo)
   }, {});
 }
 
-function encontrarCincoConsecutivosConLetras(numeros, letras) 
+function encontrarCincoConsecutivos_y_letras(numeros, letras) 
 {
-  const setNumeros = new Set(numeros);
-  const consecutivosEncontrados = [];
-
-  for (let num of setNumeros) 
+  for (let i = 0; i < numeros.length - 1; i++) 
   {
-    if (
-      setNumeros.has(num) &&
-      setNumeros.has(num + 1) &&
-      setNumeros.has(num + 2) &&
-      setNumeros.has(num + 3) &&
-      setNumeros.has(num + 4)
-    ) {
-      const secuenciaNumeros = [num, num + 1, num + 2, num + 3, num + 4];
-      const secuenciaLetras = secuenciaNumeros.map(n => letras[numeros.indexOf(n)]);
+    for (let j = i+1; j < numeros.length - i - 1; j++) 
+    {
+      if (numeros[i] > numeros[j]) 
+      {
+        var temp;
+        // Intercambiar números
+        temp = numeros[i];
+        numeros[i]=numeros[j];
+        numeros[j]=temp;
 
-      // Verificar si todas las letras son iguales en la misma posición
-      if (secuenciaLetras.every((letra, index) => letra === letras[numeros.indexOf(secuenciaNumeros[index])])) {
-        consecutivosEncontrados.push({ numeros: secuenciaNumeros, letras: secuenciaLetras });
+        // Intercambiar letras también
+        temp = letras[i];
+        letras[i]=letras[j];
+        letras[j]=temp;
       }
     }
   }
 
-  return consecutivosEncontrados;
+for (var i = 0; i < numeros.length; i++) 
+{
+    for (var j = i+1; j < numeros.length; j++) {
+        numeros[j]
+    }
+}
+
+  return ;
 }
 
 
