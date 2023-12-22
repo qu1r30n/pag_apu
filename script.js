@@ -110,7 +110,7 @@ function agregarMensaje()
     var arreglo_mano = dividirFiltroEnSegmentos(contenidoMano);
     
 
-    var resultado = evaluarJuego(arreglo_mesa,arreglo_mano);
+    //var resultado = evaluarJuego(arreglo_mesa,arreglo_mano);
 
     document.getElementById("mesaContainer").textContent=resultado;
 
@@ -123,90 +123,8 @@ function evaluarJuego(mesa, mano)
     var cartasTotales = mesa.concat(mano);
     cartasTotales = cartasTotales.map(carta => carta.toUpperCase());
     
-    var numeros = cartasTotales.map(cart => cart[0]);
-    for (var i = 0; i < numeros.length; i++) 
-    {
-        if (numeros[i]=="1") 
-        {
-            numeros[i]="10";
-        }
-        else if (numeros[i]=="j") 
-        {
-            numeros[i]="11";
-        }
-        else if (numeros[i]=="Q") 
-        {
-            numeros[i]="12";
-        }
-        else if (numeros[i]=="K") 
-        {
-            numeros[i]="13";
-        }
-        else if (numeros[i]=="A") 
-        {
-            numeros[i]="14";
-        }
-        
-    }
-
-    var letras = cartasTotales.map(cart => cart[1]);
-
-    
-
-
-    var resultado_numeros = contarElementosIguales(numeros);
-
-    
-    var resultado_letras = contarElementosIguales(letras);
-
-    var consecutivos_y_letra = contarElementosIguales(consecutivos);
-
-    var 
 
     return "";
     
 }
-
-function contarElementosIguales(arreglo) 
-{
-  return arreglo.reduce((acc, valor) => 
-  {
-    acc[valor] = (acc[valor] || 0) + 1;
-    return acc;
-  }, {});
-}
-
-function encontrarCincoConsecutivos_y_letras(numeros, letras) 
-{
-  for (let i = 0; i < numeros.length - 1; i++) 
-  {
-    for (let j = i+1; j < numeros.length - i - 1; j++) 
-    {
-      if (numeros[i] > numeros[j]) 
-      {
-        var temp;
-        // Intercambiar números
-        temp = numeros[i];
-        numeros[i]=numeros[j];
-        numeros[j]=temp;
-
-        // Intercambiar letras también
-        temp = letras[i];
-        letras[i]=letras[j];
-        letras[j]=temp;
-      }
-    }
-  }
-
-for (var i = 0; i < numeros.length; i++) 
-{
-    for (var j = i+1; j < numeros.length; j++) {
-        numeros[j]
-    }
-}
-
-  return ;
-}
-
-
 
